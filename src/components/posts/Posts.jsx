@@ -1,16 +1,19 @@
 import Post from "../post/Post";
 import "./posts.css";
 import { useState, useEffect } from 'react';
+import { useLocation } from "react-router";
 import axios from "axios";
 
 export default function Posts() {
 
+  const { search } = useLocation();
   const [posts, setPosts] = useState([]);
 
   useEffect(()=>{
 
     const getPosts = async ()=>{
-      const response = await axios.get('/posts/');
+      console.log(search);
+      const response = await axios.get('/posts/' + search);
       console.log(response);
       setPosts(response.data);
     }
