@@ -21,7 +21,7 @@ export default function Posts() {
 
   return (
     <div className="posts">
-      {posts.map(item=>{
+      {posts && posts.map(item=>{
         return ( <Post key={item._id} post={item}/> )
       })}
     </div>

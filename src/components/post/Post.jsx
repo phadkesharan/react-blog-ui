@@ -12,7 +12,7 @@ export default function Post({ post }) {
       <div className="postInfo">
 
         <div className="postCats">
-          {post.catergories.map(cat => {
+          {post.catergories && post.catergories.map(cat => {
             return (
               <span className="postCat">
                 <Link className="link" to={`/posts?cat=${cat}`}>
