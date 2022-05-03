@@ -1,14 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./singlePost.css";
 import axios from "axios";
+import { Context } from "../../context/Context";
 
 export default function SinglePost() {
 
+  const IMG_FOLDER = "http://localhost:8000/images/"; 
   const location  = useLocation();
   const postId = location.pathname.split('/')[2];
   console.log(postId);
 
+  const { user } = useContext(Context);
   const [post, setPost] = useState({});
 
   useEffect(()=>{
@@ -28,7 +31,7 @@ export default function SinglePost() {
       <div className="singlePostWrapper">
         <img
           className="singlePostImg"
-          src={post.img}
+          src={IMG_FOLDER + post.img}
           alt=""
         />
         <h1 className="singlePostTitle">

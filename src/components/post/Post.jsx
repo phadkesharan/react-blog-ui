@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import "./post.css";
 
 export default function Post({ post }) {
+
+  const IMG_FOLDER = "http://localhost:8000/images/"; 
+
+  console.log("images : ", post.img);
+
   return (
     <div className="post">
       <img
         className="postImg"
-        src={post.img}
+        src={IMG_FOLDER + post.img}
         alt=""
       />
       <div className="postInfo">
