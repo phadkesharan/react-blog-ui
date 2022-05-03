@@ -6,20 +6,36 @@ import { Context } from "../../context/Context";
 
 export default function SinglePost() {
 
-  const IMG_FOLDER = "http://localhost:8000/images/"; 
-  const location  = useLocation();
+  const IMG_FOLDER = "http://localhost:8000/images/";
+  const location = useLocation();
   const postId = location.pathname.split('/')[2];
   console.log(postId);
 
   const { user } = useContext(Context);
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({}); 
 
-  useEffect(()=>{
+  const handleDelete = async () => {
+    console.log("context user", user.username);
+    try{
+      const res = await axios.delete(`/posts/${postId}`, {
+        data: {
+          username: user.username
+        }
+      });
+      window.location.replace("/");
+      console.log(res);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
-    const getPost = async ()=>{
+  useEffect(() => {
+
+    const getPost = async () => {
       const postResponse = await axios.get(`/posts/${postId}`);
       console.log(postResponse.data);
-      setPost(postResponse.data);   
+      setPost(postResponse.data);
     }
 
     getPost();
@@ -36,10 +52,10 @@ export default function SinglePost() {
         />
         <h1 className="singlePostTitle">
           {post.title}
-          <div className="singlePostEdit">
+          {post.username === user.username && <div className="singlePostEdit">
             <i className="singlePostIcon far fa-edit"></i>
-            <i className="singlePostIcon far fa-trash-alt"></i>
-          </div>
+            <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
+          </div>}
         </h1>
         <div className="singlePostInfo">
           <span>
