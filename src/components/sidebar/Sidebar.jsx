@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import "./sidebar.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 
 export default function Sidebar() {
 
+  const { user } = useContext(Context);
   const [cat, setCat] = useState([]);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src="https://themegoods-cdn-pzbycso8wng.stackpathdns.com/grandblog/demo/wp-content/uploads/2015/11/aboutme.jpg"
+          src={user.profilePic}
           alt=""
         />
         <p>
