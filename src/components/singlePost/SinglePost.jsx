@@ -16,6 +16,7 @@ export default function SinglePost() {
   const [updateMode, setUpdateMode] = useState(false);
 
   useEffect(() => {
+    console.log("user", user);
     const getPost = async () => {
       const res = await axios.get("/posts/" + path);
       setPost(res.data);
@@ -31,7 +32,7 @@ export default function SinglePost() {
         data: { username: user.username },
       });
       window.location.replace("/");
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const handleUpdate = async () => {
@@ -42,7 +43,7 @@ export default function SinglePost() {
         desc,
       });
       setUpdateMode(false)
-    } catch (err) {}
+    } catch (err) { }
   };
 
   return (
