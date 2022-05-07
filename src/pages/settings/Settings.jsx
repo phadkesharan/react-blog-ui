@@ -7,14 +7,30 @@ import axios from "axios";
 export default function Settings() {
 
   const { user, dispatch } = useContext(Context);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState(user.password);
   const [profilePic, setProfilePic] = useState('');
   const [title, setTitle] = useState('');
   const [file, setFile] = useState(null);
   const [text, setText] = useState('');
   const [succes, setSuccess] = useState(false);
+  const PF = "http://localhost:8000/images/";
+
+  const handleDelete = async (e) =>{
+    e.preventDefault();
+
+    try {
+      const res = await axios.delete(`/users/${user._id}`, {
+        data: {userId: user._id}
+      });
+      dispatch({type: "LOGOUT"});
+      res.data && window.location.replace('/login');
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +69,6 @@ export default function Settings() {
     catch (err) {
       console.log(err);
       dispatch({ type: "UPDATE_FAILURE" });
-
     }
 
   }
@@ -63,13 +78,15 @@ export default function Settings() {
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsTitleUpdate">Update Your Account</span>
-          <span className="settingsTitleDelete">Delete Account</span>
+          <button className="settingsDeleteButton" type="submit" onClick={handleDelete}>
+            Delete Account
+          </button>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Profile Picture</label>
           <div className="settingsPP">
             <img
-              src={file ? URL.createObjectURL(file) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+              src={file ? URL.createObjectURL(file) : user?.profilePic ? (PF + user.profilePic) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
               alt="profilePic"
             />
             <label htmlFor="fileInput">
@@ -89,6 +106,7 @@ export default function Settings() {
           <input type="email" placeholder={user.email} onChange={({ target }) => setEmail(target.value)} name="email" />
           <label>Password</label>
           <input type="password" placeholder="Password" name="password" onChange={({ target }) => setPassword(target.value)} />
+          
           <button className="settingsSubmitButton" type="submit">
             Update
           </button>

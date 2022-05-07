@@ -96,6 +96,21 @@
   justify-content: center;
 }
 
+.settingsDeleteButton {
+  align-self: center;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(184, 45, 89);
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .settingsSubmitButton:hover {
   background-color: rgb(1, 114, 114);
 }

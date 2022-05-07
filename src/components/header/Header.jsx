@@ -1,9 +1,15 @@
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 import "./header.css";
 
 export default function Header() {
+
+  const { user } = useContext(Context);
+
   return (
     <div className="header">
       <div className="headerTitles">
+        {user && <span className="headerTitleUser">Welcome {user.username} !</span>}
         <span className="headerTitleSm">React & Node</span>
         <span className="headerTitleLg">BLOG</span>
       </div>
