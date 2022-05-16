@@ -12,6 +12,8 @@ export default function Sidebar() {
   console.log("side user", user);
   const [cat, setCat] = useState([]);
 
+  console.log("PF : ", PF);
+
   useEffect(() => {
 
     const getCats = async () => {

@@ -14,6 +14,9 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Shit");
+    
     dispatch({ type: "LOGIN_START" });
 
     try {
