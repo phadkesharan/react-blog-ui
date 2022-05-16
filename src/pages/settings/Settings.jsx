@@ -2,6 +2,7 @@ import "./settings.css";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
+import { PF } from "../../utils/constants/PF";
 import axios from "axios";
 
 export default function Settings() {
@@ -15,7 +16,6 @@ export default function Settings() {
   const [file, setFile] = useState(null);
   const [text, setText] = useState('');
   const [succes, setSuccess] = useState(false);
-  const PF = "http://localhost:8000/images/";
 
   const handleDelete = async (e) =>{
     e.preventDefault();

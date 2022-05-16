@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
+import { PF } from "../../utils/constants/PF";
 
 export default function Sidebar() {
 
   const { user } = useContext(Context);
   console.log("side user", user);
   const [cat, setCat] = useState([]);
-  const PF = "http://localhost:8000/images/";
 
   useEffect(() => {
 
